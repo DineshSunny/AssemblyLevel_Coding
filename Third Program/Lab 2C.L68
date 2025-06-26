@@ -1,0 +1,60 @@
+00000000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 2/26/2025 1:42:29 PM
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :Lab 2C
+00000000                             3  * Written by :Dinesh Seveti
+00000000                             4  * Date       :2/15/2025
+00000000                             5  * Description:To implement memory manipulation and 
+00000000                             6                *register operations in assembly.
+00000000                             7  *-----------------------------------------------------------
+00000000                             8    
+00000000                             9      
+00000000                            10  START: ; first instruction of program
+00000000                            11  
+00000000                            12  
+00000000  47F9 002468FA             13   LEA.L $002468FA,A3
+00000006  49F8 2544                 14   LEA.L $00002544,A4
+0000000A  4DF8 2518                 15   LEA.L $00002518,A6
+0000000E                            16  
+0000000E                            17  
+0000000E                            18   
+0000000E                            19  
+0000000E  21FC 44334241 2518        20   MOVE.L #$44334241, $00002518
+00000016  21FC 00000000 251C        21   MOVE.L #$00000000, $0000251C
+0000001E  21FC 25530000 2520        22   MOVE.L #$25530000, $00002520
+00000026  21FC 01EFABCD 2524        23   MOVE.L #$01EFABCD, $00002524
+0000002E  21FC 5467CC22 2528        24   MOVE.L #$5467CC22, $00002528
+00000036  21FC FF3412FF 252C        25   MOVE.L #$FF3412FF, $0000252C
+0000003E  21FC A2671FEE 2544        26   MOVE.L #$A2671FEE, $00002544
+00000046  21FC FFFFFFFF 2548        27   MOVE.L #$FFFFFFFF, $00002548
+0000004E  21FC 01000000 254C        28   MOVE.L #$01000000, $0000254C
+00000056  21FC ABCDFFFF 2550        29   MOVE.L #$ABCDFFFF, $00002550
+0000005E  21FC 00000000 2554        30   MOVE.L #$00000000, $00002554
+00000066                            31   
+00000066  2638 0000                 32   MOVE.L $00000000, D3
+0000006A  2A38 FFFF                 33   MOVE.L $FFFFFFFF, D5
+0000006E  2C38 0000                 34   MOVE.L $00000000, D6
+00000072                            35   
+00000072  162E 0003                 36   MOVE.B 3(A6) ,D3
+00000076  1D6C 0004 0006            37   MOVE.B 4(A4) ,6(A6)
+0000007C  1A1E                      38   MOVE.B (A6)+,D5
+0000007E  11DC 2522                 39   MOVE.B (A4)+,$002522
+00000082  1938 252E                 40   MOVE.B $00252E, -(A4)
+00000086  47F8 252A                 41   LEA.L $00252A, A3
+0000008A  3C13                      42   MOVE.W (A3),D6
+0000008C                            43   
+0000008C  FFFF FFFF                 44   SIMHALT ; halt simulator
+00000090                            45  
+00000090                            46  
+00000090                            47   END START ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+START               0

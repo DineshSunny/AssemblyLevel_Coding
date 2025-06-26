@@ -1,0 +1,45 @@
+00001500 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 2/26/2025 1:39:08 PM
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :Lab Assignment 2O
+00000000                             3  * Written by :Dinesh Seveti
+00000000                             4  * Date       :2/22/2025
+00000000                             5  * Description:Displaying a Vector
+00000000                             6  *-----------------------------------------------------------O
+00001500                             7   ORG $1500
+00001500                             8  START: ; first instruction of program
+00001500  43F8 4AC4                  9   LEA.L $004AC4, A1
+00001504  45F8 4ACE                 10   LEA.L $004ACE, A2
+00001508  47F8 4AE0                 11   LEA.L $004AE0, A3
+0000150C  49F8 4AEA                 12   LEA.L $004AEA, A4
+00001510  1019                      13   MOVE.B (A1)+, D0
+00001512  16E2                      14   MOVE.B -(A2), (A3)+
+00001514  1900                      15   MOVE.B D0, -(A4)
+00001516  1019                      16   MOVE.B (A1)+, D0
+00001518  16E2                      17   MOVE.B -(A2), (A3)+
+0000151A  1900                      18   MOVE.B D0, -(A4)
+0000151C  1019                      19   MOVE.B (A1)+, D0
+0000151E  16E2                      20   MOVE.B -(A2), (A3)+
+00001520  1900                      21   MOVE.B D0, -(A4)
+00001522  1019                      22   MOVE.B (A1)+, D0
+00001524  16E2                      23   MOVE.B -(A2), (A3)+
+00001526  1900                      24   MOVE.B D0, -(A4)
+00001528  1019                      25   MOVE.B (A1)+, D0
+0000152A  16E2                      26   MOVE.B -(A2), (A3)+
+0000152C  1900                      27   MOVE.B D0, -(A4)
+0000152E                            28             ; halt simulator
+0000152E                            29             * Variables and Strings
+00004AC4                            30   ORG $004AC4
+00004AC4= 41424344 45464748 ...     31   DC.L 'ABCDEFGHIJ'
+00004AD0                            32   END START ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+START               1500

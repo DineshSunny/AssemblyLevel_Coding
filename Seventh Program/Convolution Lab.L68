@@ -1,0 +1,114 @@
+00001110 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 3/29/2025 11:57:22 PM
+
+00001000                             1      ORG     $1000          ; Start of the program
+00001000                             2  
+00001000= 0001 0002 0003             3  image:  DC.W    1, 2, 3    ; 3x3 image row 1
+00001006= 0004 0005 0006             4          DC.W    4, 5, 6    ; 3x3 image row 2
+0000100C= 0007 0008 0009             5          DC.W    7, 8, 9    ; 3x3 image row 3
+00001012                             6  
+00001012= 0001 0000                  7  kernel: DC.W    1, 0       ; 2x2 kernel row 1
+00001016= 0000 FFFF                  8          DC.W    0, -1      ; 2x2 kernel row 2
+0000101A                             9  
+0000101A                            10  result: DS.W    4          ; Space for 2x2 result matrix
+00001022                            11  
+00001022                            12      ; Calculate result[0][0]
+00001022  3038 1000                 13      MOVE.W  image, D0      ; D0 = image[0][0] = 1
+00001026  3238 1012                 14      MOVE.W  kernel, D1     ; D1 = kernel[0][0] = 1
+0000102A  C1C1                      15      MULS    D1, D0         ; D0 = D0 * D1 = 1 * 1 = 1
+0000102C                            16  
+0000102C  3438 1002                 17      MOVE.W  image+2, D2    ; D2 = image[0][1] = 2
+00001030  3638 1014                 18      MOVE.W  kernel+2, D3   ; D3 = kernel[0][1] = 0
+00001034  C5C3                      19      MULS    D3, D2         ; D2 = D2 * D3 = 2 * 0 = 0
+00001036  D042                      20      ADD.W   D2, D0         ; D0 = D0 + D2 = 1 + 0 = 1
+00001038                            21  
+00001038  3438 1006                 22      MOVE.W  image+6, D2    ; D2 = image[1][0] = 4
+0000103C  3638 1016                 23      MOVE.W  kernel+4, D3   ; D3 = kernel[1][0] = 0
+00001040  C5C3                      24      MULS    D3, D2         ; D2 = D2 * D3 = 4 * 0 = 0
+00001042  D042                      25      ADD.W   D2, D0         ; D0 = D0 + D2 = 1 + 0 = 1
+00001044                            26  
+00001044  3438 1008                 27      MOVE.W  image+8, D2    ; D2 = image[1][1] = 5
+00001048  3638 1018                 28      MOVE.W  kernel+6, D3   ; D3 = kernel[1][1] = -1
+0000104C  C5C3                      29      MULS    D3, D2         ; D2 = D2 * D3 = 5 * -1 = -5
+0000104E  D042                      30      ADD.W   D2, D0         ; D0 = D0 + D2 = 1 + (-5) = -4
+00001050  31C0 101A                 31      MOVE.W  D0, result     ; result[0][0] = -4
+00001054                            32  
+00001054                            33      ; Calculate result[0][1]
+00001054  3038 1002                 34      MOVE.W  image+2, D0    ; D0 = image[0][1] = 2
+00001058  3238 1012                 35      MOVE.W  kernel, D1     ; D1 = kernel[0][0] = 1
+0000105C  C1C1                      36      MULS    D1, D0         ; D0 = D0 * D1 = 2 * 1 = 2
+0000105E                            37  
+0000105E  3438 1004                 38      MOVE.W  image+4, D2    ; D2 = image[0][2] = 3
+00001062  3638 1014                 39      MOVE.W  kernel+2, D3   ; D3 = kernel[0][1] = 0
+00001066  C5C3                      40      MULS    D3, D2         ; D2 = D2 * D3 = 3 * 0 = 0
+00001068  D042                      41      ADD.W   D2, D0         ; D0 = D0 + D2 = 2 + 0 = 2
+0000106A                            42  
+0000106A  3438 1008                 43      MOVE.W  image+8, D2    ; D2 = image[1][1] = 5
+0000106E  3638 1016                 44      MOVE.W  kernel+4, D3   ; D3 = kernel[1][0] = 0
+00001072  C5C3                      45      MULS    D3, D2         ; D2 = D2 * D3 = 5 * 0 = 0
+00001074  D042                      46      ADD.W   D2, D0         ; D0 = D0 + D2 = 2 + 0 = 2
+00001076                            47  
+00001076  3438 100A                 48      MOVE.W  image+10, D2   ; D2 = image[1][2] = 6
+0000107A  3638 1018                 49      MOVE.W  kernel+6, D3   ; D3 = kernel[1][1] = -1
+0000107E  C5C3                      50      MULS    D3, D2         ; D2 = D2 * D3 = 6 * -1 = -6
+00001080  D042                      51      ADD.W   D2, D0         ; D0 = D0 + D2 = 2 + (-6) = -4
+00001082  31C0 101C                 52      MOVE.W  D0, result+2   ; result[0][1] = -4
+00001086                            53  
+00001086                            54      ; Calculate result[1][0]
+00001086  3038 1006                 55      MOVE.W  image+6, D0    ; D0 = image[1][0] = 4
+0000108A  3238 1012                 56      MOVE.W  kernel, D1     ; D1 = kernel[0][0] = 1
+0000108E  C1C1                      57      MULS    D1, D0         ; D0 = D0 * D1 = 4 * 1 = 4
+00001090                            58  
+00001090  3438 1008                 59      MOVE.W  image+8, D2    ; D2 = image[1][1] = 5
+00001094  3638 1014                 60      MOVE.W  kernel+2, D3   ; D3 = kernel[0][1] = 0
+00001098  C5C3                      61      MULS    D3, D2         ; D2 = D2 * D3 = 5 * 0 = 0
+0000109A  D042                      62      ADD.W   D2, D0         ; D0 = D0 + D2 = 4 + 0 = 4
+0000109C                            63  
+0000109C  3438 100C                 64      MOVE.W  image+12, D2   ; D2 = image[2][0] = 7
+000010A0  3638 1016                 65      MOVE.W  kernel+4, D3   ; D3 = kernel[1][0] = 0
+000010A4  C5C3                      66      MULS    D3, D2         ; D2 = D2 * D3 = 7 * 0 = 0
+000010A6  D042                      67      ADD.W   D2, D0         ; D0 = D0 + D2 = 4 + 0 = 4
+000010A8                            68  
+000010A8  3438 100E                 69      MOVE.W  image+14, D2   ; D2 = image[2][1] = 8
+000010AC  3638 1018                 70      MOVE.W  kernel+6, D3   ; D3 = kernel[1][1] = -1
+000010B0  C5C3                      71      MULS    D3, D2         ; D2 = D2 * D3 = 8 * -1 = -8
+000010B2  D042                      72      ADD.W   D2, D0         ; D0 = D0 + D2 = 4 + (-8) = -4
+000010B4  31C0 101E                 73      MOVE.W  D0, result+4   ; result[1][0] = -4
+000010B8                            74  
+000010B8                            75      ; Calculate result[1][1]
+000010B8  3038 1008                 76      MOVE.W  image+8, D0    ; D0 = image[1][1] = 5
+000010BC  3238 1012                 77      MOVE.W  kernel, D1     ; D1 = kernel[0][0] = 1
+000010C0  C1C1                      78      MULS    D1, D0         ; D0 = D0 * D1 = 5 * 1 = 5
+000010C2                            79  
+000010C2  3438 100A                 80      MOVE.W  image+10, D2   ; D2 = image[1][2] = 6
+000010C6  3638 1014                 81      MOVE.W  kernel+2, D3   ; D3 = kernel[0][1] = 0
+000010CA  C5C3                      82      MULS    D3, D2         ; D2 = D2 * D3 = 6 * 0 = 0
+000010CC  D042                      83      ADD.W   D2, D0         ; D0 = D0 + D2 = 5 + 0 = 5
+000010CE                            84  
+000010CE  3438 100E                 85      MOVE.W  image+14, D2   ; D2 = image[2][1] = 8
+000010D2  3638 1016                 86      MOVE.W  kernel+4, D3   ; D3 = kernel[1][0] = 0
+000010D6  C5C3                      87      MULS    D3, D2         ; D2 = D2 * D3 = 8 * 0 = 0
+000010D8  D042                      88      ADD.W   D2, D0         ; D0 = D0 + D2 = 5 + 0 = 5
+000010DA                            89  
+000010DA  3438 1010                 90      MOVE.W  image+16, D2   ; D2 = image[2][2] = 9
+000010DE  3638 1018                 91      MOVE.W  kernel+6, D3   ; D3 = kernel[1][1] = -1
+000010E2  C5C3                      92      MULS    D3, D2         ; D2 = D2 * D3 = 9 * -1 = -9
+000010E4  D042                      93      ADD.W   D2, D0         ; D0 = D0 + D2 = 5 + (-9) = -4
+000010E6  31C0 1020                 94      MOVE.W  D0, result+6   ; result[1][1] = -4
+000010EA                            95  
+000010EA                            96      ; End of program
+000010EA  FFFF FFFF                 97      SIMHALT                 ; Halt the simulator
+000010EE                            98  
+000010EE                            99      END $1110               ; End of program, set starting address
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+IMAGE               1000
+KERNEL              1012
+RESULT              101A

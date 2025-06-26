@@ -1,0 +1,86 @@
+00001100 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 4/12/2025 11:37:13 PM
+
+00001100                             1          ORG $1100
+00001100                             2  DECODER:
+00001100  7000                       3          MOVE.L #0,D0
+00001102  7200                       4          MOVE.L #0,D1
+00001104  7400                       5          MOVE.L #0,D2
+00001106  7600                       6          MOVE.L #0,D3
+00001108  7800                       7          MOVE.L #0,D4
+0000110A  7A00                       8          MOVE.L #0,D5
+0000110C  7C00                       9          MOVE.L #0,D6
+0000110E  7E00                      10          MOVE.L #0,D7
+00001110                            11  
+00001110  11FC 0055 2500            12          MOVE.B #$55, $002500
+00001116  41F8 2500                 13          LEA.L $002500,A0
+0000111A  1210                      14          MOVE.B (A0),D1
+0000111C                            15  
+0000111C  1401                      16          MOVE.B D1,D2
+0000111E  0202 0080                 17          ANDI.B #$80,D2
+00001122  EE0A                      18          LSR.B  #7,D2
+00001124                            19  
+00001124  1601                      20          MOVE.B D1,D3
+00001126  0203 0040                 21          ANDI.B #$40,D3
+0000112A  EC0B                      22          LSR.B  #6,D3
+0000112C                            23  
+0000112C  1801                      24          MOVE.B D1,D4
+0000112E  0204 0020                 25          ANDI.B #$20,D4
+00001132  EA0C                      26          LSR.B  #5,D4
+00001134                            27  
+00001134  1A01                      28          MOVE.B D1,D5
+00001136  0205 0010                 29          ANDI.B #$10,D5
+0000113A  E80D                      30          LSR.B  #4,D5
+0000113C                            31  
+0000113C  1C01                      32          MOVE.B D1,D6
+0000113E  0206 0008                 33          ANDI.B #$08,D6
+00001142  E60E                      34          LSR.B  #3,D6
+00001144                            35  
+00001144  1E01                      36          MOVE.B D1,D7
+00001146  0207 0004                 37          ANDI.B #$04,D7
+0000114A  E40F                      38          LSR.B  #2,D7
+0000114C                            39  
+0000114C  1001                      40          MOVE.B D1,D0
+0000114E  0200 0002                 41          ANDI.B #$02,D0
+00001152  E208                      42          LSR.B  #1,D0
+00001154                            43  
+00001154  1202                      44          MOVE.B D2,D1
+00001156  B701                      45          EOR.B  D3,D1
+00001158  B901                      46          EOR.B  D4,D1
+0000115A  BD01                      47          EOR.B  D6,D1
+0000115C  BA01                      48          CMP.B  D1,D5
+0000115E  6700 0006                 49          BEQ    R_OK
+00001162  1A3C 0004                 50          MOVE.B #4,D5
+00001166  4A05                      51  R_OK:   TST.B  D5
+00001168                            52  
+00001168  1202                      53          MOVE.B D2,D1
+0000116A  B701                      54          EOR.B  D3,D1
+0000116C  BD01                      55          EOR.B  D6,D1
+0000116E  BE01                      56          CMP.B  D1,D7
+00001170  6700 0004                 57          BEQ    S_OK
+00001174  5405                      58          ADDI.B #2,D5
+00001176  4A05                      59  S_OK:   TST.B  D5
+00001178                            60  
+00001178  1202                      61          MOVE.B D2,D1
+0000117A  B901                      62          EOR.B  D4,D1
+0000117C  BD01                      63          EOR.B  D6,D1
+0000117E  B001                      64          CMP.B  D1,D0
+00001180  6700 0004                 65          BEQ    T_OK
+00001184  5205                      66          ADDI.B #1,D5
+00001186  1005                      67  T_OK:   MOVE.B D5,D0
+00001188                            68  
+00001188  FFFF FFFF                 69          SIMHALT
+0000118C                            70          END DECODER
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+DECODER             1100
+R_OK                1166
+S_OK                1176
+T_OK                1186

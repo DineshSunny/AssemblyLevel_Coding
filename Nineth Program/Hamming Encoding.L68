@@ -1,0 +1,63 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 4/12/2025 11:36:36 PM
+
+00001000                             1          ORG $1000
+00001000                             2  START:  
+00001000  7400                       3          MOVE.L #0,D2
+00001002  7600                       4          MOVE.L #0,D3
+00001004  7800                       5          MOVE.L #0,D4
+00001006  7A00                       6          MOVE.L #0,D5
+00001008  7C00                       7          MOVE.L #0,D6
+0000100A  7E00                       8          MOVE.L #0,D7
+0000100C                             9  
+0000100C  11FC 000B 2400            10          MOVE.B #11,$00002400
+00001012  41F8 2400                 11          LEA.L $00002400,A0
+00001016  1210                      12          MOVE.B (A0),D1
+00001018                            13  
+00001018  7401                      14          MOVE.L #1,D2
+0000101A  7602                      15          MOVE.L #2,D3
+0000101C  7804                      16          MOVE.L #4,D4
+0000101E  7A08                      17          MOVE.L #8,D5
+00001020                            18  
+00001020  C441                      19          AND.W D1,D2
+00001022  C641                      20          AND.W D1,D3
+00001024  C841                      21          AND.W D1,D4
+00001026  CA41                      22          AND.W D1,D5
+00001028                            23  
+00001028  E24B                      24          LSR.W #1,D3
+0000102A  E44C                      25          LSR.W #2,D4
+0000102C  E64D                      26          LSR.W #3,D5
+0000102E                            27  
+0000102E  1005                      28          MOVE.B D5,D0
+00001030  B945                      29          EOR.W D4,D5
+00001032  B745                      30          EOR.W D3,D5
+00001034                            31  
+00001034  E249                      32          LSR.W #1,D1
+00001036  E349                      33          LSL.W #1,D1
+00001038  BB41                      34          EOR.W D5,D1
+0000103A                            35  
+0000103A  E349                      36          LSL.W #1,D1
+0000103C  B541                      37          EOR.W D2,D1
+0000103E                            38  
+0000103E  B144                      39          EOR.W D0,D4
+00001040  B544                      40          EOR.W D2,D4
+00001042                            41  
+00001042  B143                      42          EOR.W D0,D3
+00001044  B543                      43          EOR.W D2,D3
+00001046                            44  
+00001046  B941                      45          EOR.W D4,D1
+00001048  E349                      46          LSL.W #1,D1
+0000104A  B741                      47          EOR.W D3,D1
+0000104C                            48  
+0000104C  FFFF FFFF                 49          SIMHALT
+00001050                            50          END START
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+START               1000

@@ -1,0 +1,65 @@
+0000204A Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 1/25/2025 9:09:30 PM
+
+00000000                             1  *-----------------------------------------------------------
+00000000                             2  * Title      :CSCI 592 Lab 1.C
+00000000                             3  * Written by :DINESH SEVETI
+00000000                             4  * Date       :01-25-2025
+00000000                             5  * Description:EASY68K Assembler to create data in memory and execute a small program.
+00000000                             6  *----------------------------------------------------------- 
+00002000                             7   ORG $2000
+00002000= 41 42 43 44 45 46 ...      8   DC.B 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'   
+00002020                             9   ORG $2020
+00002020= 61 62 63 64 65 66 ...     10   DC.B 'abcdefghijklmnopqrstuvwxyz'   
+00002040                            11   ORG $2040
+00002040= 30 31 32 33 34 35 ...     12   DC.B '0123456789'                  
+0000204A                            13  START:                  
+0000204A  45F8 2000                 14   LEA $2000,A2       
+0000204E  47F8 2020                 15   LEA $2020,A3       
+00002052  49F8 2040                 16   LEA $2040,A4       
+00002056  43F8 2200                 17   LEA $2200,A1       
+0000205A                            18  
+0000205A                            19  
+0000205A  12EA 000F                 20   MOVE.B 15(A2),(A1)+    
+0000205E  12EB 0004                 21   MOVE.B 4(A3),(A1)+     
+00002062  12EB 0013                 22   MOVE.B 19(A3),(A1)+    
+00002066  12EB 0013                 23   MOVE.B 19(A3),(A1)+    
+0000206A  12EB 0004                 24   MOVE.B 4(A3),(A1)+      
+0000206E  12EB 0011                 25   MOVE.B 17(A3),(A1)+    
+00002072  12EB 000D                 26   MOVE.B 13(A3),(A1)+     
+00002076  12FC 0020                 27   MOVE.B #32,(A1)+       
+0000207A                            28  
+0000207A                            29  
+0000207A  12EB 0012                 30   MOVE.B 18(A3),(A1)+    
+0000207E  12EB 0004                 31   MOVE.B 4(A3),(A1)+     
+00002082  12FC 0020                 32   MOVE.B #32,(A1)+       
+00002086                            33  
+00002086  12EA 0002                 34   MOVE.B 2(A2),(A1)+     
+0000208A  12EA 000E                 35   MOVE.B 14(A2),(A1)+    
+0000208E  12EA 0002                 36   MOVE.B 2(A2),(A1)+     
+00002092  12EA 0007                 37   MOVE.B 7(A2),(A1)+     
+00002096  12FC 0020                 38   MOVE.B #32,(A1)+       
+0000209A                            39  
+0000209A                            40  
+0000209A  12EC 0003                 41   MOVE.B 3(A4),(A1)+    
+0000209E  12EC 0002                 42   MOVE.B 2(A4),(A1)+     
+000020A2  12EC 0001                 43   MOVE.B 1(A4),(A1)+     
+000020A6                            44  
+000020A6                            45   
+000020A6  12FC 0021                 46   MOVE.B #33,(A1)+       
+000020AA  12FC 0021                 47   MOVE.B #33,(A1)+       
+000020AE  12FC 0021                 48   MOVE.B #33,(A1)+       
+000020B2                            49  
+000020B2  FFFF FFFF                 50   SIMHALT                
+000020B6                            51  
+000020B6                            52   END START              
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+START               204A
